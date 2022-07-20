@@ -2,8 +2,7 @@
 const cells = document.querySelectorAll('.grid__element');
 
 // function create Player
-const player = (playerName, playerMark) => {
-  // get name, get mark
+const player = function (playerName, playerMark) {
   const getName = () => playerName;
   const getMark = () => playerMark;
   // set name, set mark
@@ -19,7 +18,7 @@ const player = (playerName, playerMark) => {
 };
 
 /// create game interface to store data
-const gameData = () => {
+const gameData = function () {
   // board
   const board = new Array(9).fill(null);
 
@@ -70,12 +69,10 @@ const gameLogic = (function () {
     [2, 5, 8],
   ];
 
-  const checkWinner = (winConditions) => {
+  const checkWinner = function (winConditions) {
     // get values at board[winCondition[element]]
     function mapBoardValues(subArr) {
-      const elements = subArr.map((el) => {
-        return ticTacToe.getCell(el);
-      });
+      const elements = subArr.map((el) => ticTacToe.getCell(el));
 
       // test for equality
       const solution = elements.every(
@@ -91,6 +88,17 @@ const gameLogic = (function () {
     return isWinner;
   };
 
+  // clear the board and the dom
+  const clear = function () {
+    currentPlayer = player1;
+
+    ticTacToe.getBoard().forEach((el, i) => ticTacToe.setCell(i, null));
+
+    setTimeout(() => {
+      cells.forEach((c) => (c.textContent = ''));
+    }, '1000');
+  };
+
   // attach event listeners to each div
 
   cells.forEach((cell, i) =>
@@ -102,13 +110,15 @@ const gameLogic = (function () {
         // set the value in the DOM
         e.target.textContent = currentPlayer.getMark();
 
+        //check for winner
+        if (checkWinner(winConditions)) {
+          console.log(`${currentPlayer.getName()} won!`);
+          clear();
+          return;
+        }
+
         // switch player
         switchPlayer();
-        console.log(ticTacToe.getBoard());
-
-        //check for winner
-        if (checkWinner(winConditions))
-          console.log(`${currentPlayer.getName()} won!`);
       }
     })
   );
