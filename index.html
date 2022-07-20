@@ -16,7 +16,7 @@
     <h1 class="heading">Tic-Tac-Toe</h1>
     <div class="main__container">
       <div class="message__div">
-        <p class="message">Player X turn</p>
+        <p class="message">Player X's turn</p>
       </div>
       <div class="grid__container">
         <div class="grid__element"></div>
@@ -32,7 +32,14 @@
       <div class="btn__div">
         <button class="btn btn__clear">Restart</button>
       </div>
+
+      <div class="div__winner hidden">
+        <p class="message">Player X wins!</p>
+        <button class="btn btn__play__again">Play again</button>
+      </div>
     </div>
+
+    <div class="overlay hidden"></div>
     <script src="script.js"></script>
   </body>
 </html>

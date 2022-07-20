@@ -1,7 +1,21 @@
 // selectors
 const cells = document.querySelectorAll('.grid__element');
 const btnClear = document.querySelector('.btn__clear');
-const displayTurn = document.querySelector('.message');
+const message = document.querySelector('.message');
+const overlay = document.querySelector('.overlay');
+const winnerDiv = document.querySelector('.div__winner');
+const playAgain = document.querySelector('.btn__play__again');
+
+// display overlay / winner div
+const displayWinner = () => {
+  overlay.classList.remove('hidden');
+  winnerDiv.classList.remove('hidden');
+};
+
+// hide overlay / winner div
+const hideWinner = (element) => {
+  element.classList.add('hidden');
+};
 
 // function create Player
 const player = function (playerName, playerMark) {
@@ -98,14 +112,14 @@ const gameLogic = (function () {
 
     cells.forEach((c) => (c.textContent = ''));
 
-    displayTurn.textContent = `Player X's turn`;
+    message.textContent = `Player X's turn`;
   };
 
   // attach event listeners to each div
 
   cells.forEach((cell, i) =>
     cell.addEventListener('click', function (e) {
-      displayTurn.textContent =
+      message.textContent =
         currentPlayer.getName() === 'Player X'
           ? `Player O's turn`
           : `Player X's turn`;
@@ -119,7 +133,7 @@ const gameLogic = (function () {
 
         //check for winner
         if (checkWinner(winConditions)) {
-          console.log(`${currentPlayer.getName()} won!`);
+          displayWinner();
           clear();
           return;
         }
