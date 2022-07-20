@@ -1,6 +1,7 @@
 // selectors
 const cells = document.querySelectorAll('.grid__element');
 const btnClear = document.querySelector('.btn__clear');
+const displayTurn = document.querySelector('.message');
 
 // function create Player
 const player = function (playerName, playerMark) {
@@ -45,8 +46,8 @@ const ticTacToe = gameData();
 
 const gameLogic = (function () {
   // create players
-  const player1 = player('Player 1', 'X');
-  const player2 = player('Player 2', 'O');
+  const player1 = player('Player X', 'X');
+  const player2 = player('Player O', 'O');
 
   let currentPlayer = player1;
 
@@ -102,6 +103,11 @@ const gameLogic = (function () {
 
   cells.forEach((cell, i) =>
     cell.addEventListener('click', function (e) {
+      displayTurn.textContent =
+        currentPlayer.getName() === 'Player X'
+          ? `Player O's turn`
+          : `Player X's turn`;
+
       // on click push player.getMark on board[i]
       if (ticTacToe.getCell(i) === null) {
         ticTacToe.setCell(i, currentPlayer.getMark());
