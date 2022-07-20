@@ -1,5 +1,6 @@
 // selectors
 const cells = document.querySelectorAll('.grid__element');
+const btnClear = document.querySelector('.btn__clear');
 
 // function create Player
 const player = function (playerName, playerMark) {
@@ -94,9 +95,7 @@ const gameLogic = (function () {
 
     ticTacToe.getBoard().forEach((el, i) => ticTacToe.setCell(i, null));
 
-    setTimeout(() => {
-      cells.forEach((c) => (c.textContent = ''));
-    }, '1000');
+    cells.forEach((c) => (c.textContent = ''));
   };
 
   // attach event listeners to each div
@@ -120,11 +119,17 @@ const gameLogic = (function () {
         // switch player
         switchPlayer();
       }
-
       if (ticTacToe.getBoard().every((el) => typeof el === 'string')) {
-        console.log('No winner!');
+        console.log("It's a draw");
         clear();
       }
     })
   );
+
+  return {
+    clear,
+  };
 })();
+
+// reset game
+btnClear.addEventListener('click', gameLogic.clear);
