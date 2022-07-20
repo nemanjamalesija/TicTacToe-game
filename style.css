@@ -76,17 +76,9 @@ body {
   font-weight: 600;
 }
 
-/* win message*/
-/*
-.div__winner {
- 
-
-  
-  border-radius: 30px;
-  padding: 6rem 0;
-  background-color: blue;
+.message__winner {
+  font-size: 3rem;
 }
-*/
 
 .div__winner {
   display: flex;
