@@ -97,6 +97,8 @@ const gameLogic = (function () {
     ticTacToe.getBoard().forEach((el, i) => ticTacToe.setCell(i, null));
 
     cells.forEach((c) => (c.textContent = ''));
+
+    displayTurn.textContent = `Player X's turn`;
   };
 
   // attach event listeners to each div
