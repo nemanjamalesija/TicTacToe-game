@@ -120,6 +120,11 @@ const gameLogic = (function () {
         // switch player
         switchPlayer();
       }
+
+      if (ticTacToe.getBoard().every((el) => typeof el === 'string')) {
+        console.log('No winner!');
+        clear();
+      }
     })
   );
 })();
